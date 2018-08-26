@@ -50,6 +50,9 @@ def decision_step(Rover):
                     # Release the brake to allow turning
                     Rover.brake = 0
                     # Turn range is +/- 15 degrees, when stopped the next line will induce 4-wheel turning
+                    if len(Rover.nav_angles) > 0:
+                        if np.mean(Rover.nav_angles) > 0:
+                            Rover.steer = 15                            
                     Rover.steer = -15 # Could be more clever here about which way to turn
                 # If we're stopped but see sufficient navigable terrain in front then go!
                 if len(Rover.nav_angles) >= Rover.go_forward:
